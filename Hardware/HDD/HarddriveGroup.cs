@@ -23,7 +23,7 @@ namespace OpenHardwareMonitor.Hardware.HDD {
     private readonly List<AbstractHarddrive> hardware = 
       new List<AbstractHarddrive>();
 
-    public HarddriveGroup(ISettings settings) {
+    public HarddriveGroup(IDictionary<string,string> settings) {
 
       if (Software.OperatingSystem.IsLinux) return;
 

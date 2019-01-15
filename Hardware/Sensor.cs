@@ -29,25 +29,25 @@ namespace OpenHardwareMonitor.Hardware {
     private float? minValue;
     private float? maxValue;
     private readonly List<SensorValue> values = new List<SensorValue>();
-    private readonly ISettings settings;
+    private readonly IDictionary<string, string> settings;
     private IControl control;
     
     private float sum;
     private int count;
    
     public Sensor(string name, int index, SensorType sensorType,
-      Hardware hardware, ISettings settings) : 
+      Hardware hardware, IDictionary<string, string> settings) : 
       this(name, index, sensorType, hardware, null, settings) { }
 
     public Sensor(string name, int index, SensorType sensorType,
-      Hardware hardware, ParameterDescription[] parameterDescriptions, 
-      ISettings settings) :
+      Hardware hardware, ParameterDescription[] parameterDescriptions,
+      IDictionary<string, string> settings) :
       this(name, index, false, sensorType, hardware,
         parameterDescriptions, settings) { }
 
     public Sensor(string name, int index, bool defaultHidden, 
       SensorType sensorType, Hardware hardware, 
-      ParameterDescription[] parameterDescriptions, ISettings settings) 
+      ParameterDescription[] parameterDescriptions, IDictionary<string, string> settings) 
     {           
       this.index = index;
       this.defaultHidden = defaultHidden;
@@ -61,9 +61,12 @@ namespace OpenHardwareMonitor.Hardware {
 
       this.settings = settings;
       this.defaultName = name; 
-      this.name = settings.GetValue(
-        new Identifier(Identifier, "name").ToString(), name);
 
+      this.name = name;
+      if (settings.TryGetValue(new Identifier(Identifier, "name").ToString(), out string settingsnamme))
+      {
+        this.name = settingsnamme;
+      }
       GetSensorValuesFromSettings();      
 
       hardware.Closing += delegate(IHardware h) {
@@ -85,15 +88,14 @@ namespace OpenHardwareMonitor.Hardware {
           }
           writer.Flush();
         }
-        settings.SetValue(new Identifier(Identifier, "values").ToString(),
-          Convert.ToBase64String(m.ToArray()));
+        settings[new Identifier(Identifier, "values").ToString()] =
+          Convert.ToBase64String(m.ToArray());
       }
     }
 
     private void GetSensorValuesFromSettings() {
       string name = new Identifier(Identifier, "values").ToString();
-      string s = settings.GetValue(name, null);
-
+      settings.TryGetValue(name, out string s);
       try {
         byte[] array = Convert.FromBase64String(s);
         s = null;
@@ -156,7 +158,7 @@ namespace OpenHardwareMonitor.Hardware {
           name = value;          
         else 
           name = defaultName;
-        settings.SetValue(new Identifier(Identifier, "name").ToString(), name);
+        settings[new Identifier(Identifier, "name").ToString()] = name;
       }
     }
 

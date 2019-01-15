@@ -19,15 +19,17 @@ namespace OpenHardwareMonitor.Hardware
     private readonly Identifier identifier;
     protected readonly string name;
     private string customName;
-    protected readonly ISettings settings;
+    protected readonly IDictionary<string, string> settings;
     protected readonly HashSet<ISensor> active = new HashSet<ISensor>();
 
-    public Hardware(string name, Identifier identifier, ISettings settings) {
+    public Hardware(string name, Identifier identifier, IDictionary<string, string> settings) {
       this.settings = settings;
       this.identifier = identifier;
       this.name = name;
-      this.customName = settings.GetValue(
-        new Identifier(Identifier, "name").ToString(), name);
+      
+      if (settings.TryGetValue(new Identifier(Identifier, "name").ToString(), out string customname)) {
+        this.customName = customname;
+      }
     }
 
     public IHardware[] SubHardware {
@@ -61,8 +63,8 @@ namespace OpenHardwareMonitor.Hardware
           customName = value;
         else
           customName = name;
-        settings.SetValue(new Identifier(Identifier, "name").ToString(), 
-          customName);
+        settings[new Identifier(Identifier, "name").ToString()] =
+          customName;
       }
     }
 

@@ -9,6 +9,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace OpenHardwareMonitor.Hardware.ATI {
@@ -27,7 +28,7 @@ namespace OpenHardwareMonitor.Hardware.ATI {
     private readonly Control fanControl;  
 
     public ATIGPU(string name, int adapterIndex, int busNumber, 
-      int deviceNumber, ISettings settings) 
+      int deviceNumber, IDictionary<string, string> settings) 
       : base(name, new Identifier("atigpu", 
         adapterIndex.ToString(CultureInfo.InvariantCulture)), settings)
     {

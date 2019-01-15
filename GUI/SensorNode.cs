@@ -18,7 +18,7 @@ namespace OpenHardwareMonitor.GUI {
   public class SensorNode : Node {
     
     private ISensor sensor;
-    private PersistentSettings settings;
+    private IDictionary<string, string> settings;
     private UnitManager unitManager;
     public string format;
     private bool plot = false;
@@ -68,7 +68,7 @@ namespace OpenHardwareMonitor.GUI {
         return "-";
     }
 
-    public SensorNode(ISensor sensor, PersistentSettings settings, 
+    public SensorNode(ISensor sensor, IDictionary<string, string> settings, 
       UnitManager unitManager) : base() {      
       this.sensor = sensor;
       this.settings = settings;
@@ -98,7 +98,7 @@ namespace OpenHardwareMonitor.GUI {
         "plot").ToString(), false);
 
       string id = new Identifier(sensor.Identifier, "penColor").ToString();
-      if (settings.Contains(id))
+      if (settings.ContainsKey(id))
         this.PenColor = settings.GetValue(id, Color.Black);
     }
 

@@ -22,7 +22,7 @@ using OxyPlot.Series;
 namespace OpenHardwareMonitor.GUI {
   public class PlotPanel : UserControl {
 
-    private readonly PersistentSettings settings;
+    private readonly IDictionary<string, string> settings;
     private readonly UnitManager unitManager;
 
     private readonly Plot plot;
@@ -39,7 +39,7 @@ namespace OpenHardwareMonitor.GUI {
     private double dpiXscale = 1;
     private double dpiYscale = 1;
 
-    public PlotPanel(PersistentSettings settings, UnitManager unitManager) {
+    public PlotPanel(IDictionary<string, string> settings, UnitManager unitManager) {
       this.settings = settings;
       this.unitManager = unitManager;
 

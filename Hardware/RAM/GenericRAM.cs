@@ -8,6 +8,7 @@
 	
 */
 
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 namespace OpenHardwareMonitor.Hardware.RAM {
@@ -17,7 +18,7 @@ namespace OpenHardwareMonitor.Hardware.RAM {
     private Sensor usedMemory;
     private Sensor availableMemory;
 
-    public GenericRAM(string name, ISettings settings)
+    public GenericRAM(string name, IDictionary<string, string> settings)
       : base(name, new Identifier("ram"), settings)
     {   
       loadSensor = new Sensor("Memory", 0, SensorType.Load, this, settings);

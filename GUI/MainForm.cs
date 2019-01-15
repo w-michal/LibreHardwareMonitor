@@ -27,7 +27,7 @@ using OpenHardwareMonitor.Utilities;
 namespace OpenHardwareMonitor.GUI {
   public partial class MainForm : Form {
 
-    private PersistentSettings settings;
+    private IDictionary<string, string> settings;
     private UnitManager unitManager;
     private Computer computer;
     private Node root;
@@ -85,7 +85,7 @@ namespace OpenHardwareMonitor.GUI {
         Environment.Exit(0);
       }
 
-      this.settings = new PersistentSettings();      
+      this.settings = new Dictionary<string, string>();      
       this.settings.Load(Path.ChangeExtension(
         Application.ExecutablePath, ".config"));
 
@@ -637,7 +637,7 @@ namespace OpenHardwareMonitor.GUI {
 
       Rectangle intersection = Rectangle.Intersect(fullWorkingArea, newBounds);
       if (intersection.Width < 20 || intersection.Height < 20 ||
-        !settings.Contains("mainForm.Location.X")
+        !settings.ContainsKey("mainForm.Location.X")
       ) {
         newBounds.X = (Screen.PrimaryScreen.WorkingArea.Width / 2) -
                       (newBounds.Width/2);

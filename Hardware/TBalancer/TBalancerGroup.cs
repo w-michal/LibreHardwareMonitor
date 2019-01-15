@@ -20,7 +20,7 @@ namespace OpenHardwareMonitor.Hardware.TBalancer {
     private readonly List<TBalancer> hardware = new List<TBalancer>();
     private readonly StringBuilder report = new StringBuilder();
 
-    public TBalancerGroup(ISettings settings) {
+    public TBalancerGroup(IDictionary<string, string> settings) {
 
       uint numDevices;
       try {

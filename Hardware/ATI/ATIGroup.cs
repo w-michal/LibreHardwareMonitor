@@ -19,7 +19,7 @@ namespace OpenHardwareMonitor.Hardware.ATI {
     private readonly List<ATIGPU> hardware = new List<ATIGPU>();
     private readonly StringBuilder report = new StringBuilder();
 
-    public ATIGroup(ISettings settings) {
+    public ATIGroup(IDictionary<string, string> settings) {
       try {
         int status = ADL.ADL_Main_Control_Create(1);
 

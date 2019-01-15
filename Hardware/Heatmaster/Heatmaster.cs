@@ -9,6 +9,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
@@ -107,7 +108,7 @@ namespace OpenHardwareMonitor.Hardware.Heatmaster {
       return WriteField(device, field, '"' + value + '"');
     }
 
-    public Heatmaster(string portName, ISettings settings) 
+    public Heatmaster(string portName, IDictionary<string, string> settings) 
       : base("Heatmaster", new Identifier("heatmaster",
         portName.TrimStart(new [] {'/'}).ToLowerInvariant()), settings)
     {

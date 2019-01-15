@@ -53,7 +53,7 @@ namespace OpenHardwareMonitor.Hardware.CPU {
         return "CPU Core #" + (i + 1);
     }
 
-    public GenericCPU(int processorIndex, CPUID[][] cpuid, ISettings settings)
+    public GenericCPU(int processorIndex, CPUID[][] cpuid, IDictionary<string, string> settings)
       : base(cpuid[0][0].Name, CreateIdentifier(cpuid[0][0].Vendor, 
       processorIndex), settings)
     {

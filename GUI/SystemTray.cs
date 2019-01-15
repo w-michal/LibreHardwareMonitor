@@ -19,13 +19,13 @@ using OpenHardwareMonitor.Utilities;
 namespace OpenHardwareMonitor.GUI {
   public class SystemTray : IDisposable {
     private IComputer computer;
-    private PersistentSettings settings;
+    private IDictionary<string, string> settings;
     private UnitManager unitManager;
     private List<SensorNotifyIcon> list = new List<SensorNotifyIcon>();
     private bool mainIconEnabled = false;
     private NotifyIconAdv mainIcon;
 
-    public SystemTray(IComputer computer, PersistentSettings settings,
+    public SystemTray(IComputer computer, IDictionary<string, string> settings,
       UnitManager unitManager) 
     {
       this.computer = computer;

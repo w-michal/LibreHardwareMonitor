@@ -46,7 +46,7 @@ namespace OpenHardwareMonitor.GUI {
     private IDictionary<IHardware, IList<ISensor>> sensors =
       new SortedDictionary<IHardware, IList<ISensor>>(new HardwareComparer());
 
-    private PersistentSettings settings;
+    private IDictionary<string, string> settings;
     private UserOption hardwareNames;
     private UserOption alwaysOnTop;
     private UserOption lockPositionAndSize;
@@ -58,7 +58,7 @@ namespace OpenHardwareMonitor.GUI {
     private StringFormat trimStringFormat;
     private StringFormat alignRightStringFormat;
 
-    public SensorGadget(IComputer computer, PersistentSettings settings, 
+    public SensorGadget(IComputer computer, IDictionary<string, string> settings, 
       UnitManager unitManager) 
     {
       this.unitManager = unitManager;
@@ -576,7 +576,8 @@ namespace OpenHardwareMonitor.GUI {
                 case SensorType.Data:
                   format = "{0:F1} GB";
                   break;
-                case SensorType.SmallData:                  format = "{0:F0} MB";
+                case SensorType.SmallData:
+                  format = "{0:F0} MB";
                   break;
                 case SensorType.Factor:
                   format = "{0:F3}";

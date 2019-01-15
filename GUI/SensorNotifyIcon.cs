@@ -9,6 +9,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -36,7 +37,7 @@ namespace OpenHardwareMonitor.GUI {
     private Font smallFont;
 
     public SensorNotifyIcon(SystemTray sensorSystemTray, ISensor sensor,
-      bool balloonTip, PersistentSettings settings, UnitManager unitManager) 
+      bool balloonTip, IDictionary<string, string> settings, UnitManager unitManager) 
     {
       this.unitManager = unitManager;
       this.sensor = sensor;

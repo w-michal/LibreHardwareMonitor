@@ -7,10 +7,10 @@ namespace OpenHardwareMonitor.Hardware.Nic
 {
     internal class NicGroup : IGroup
     {
-        private readonly ISettings _settings;
+        private readonly IDictionary<string, string> _settings;
         private List<Nic> _hardware = new List<Nic>();
 
-        public NicGroup(ISettings settings)
+        public NicGroup(IDictionary<string, string> settings)
         {
             _settings = settings;
             ScanNics(settings);
@@ -18,7 +18,7 @@ namespace OpenHardwareMonitor.Hardware.Nic
             NetworkChange.NetworkAvailabilityChanged += NetworkChange_NetworkAddressChanged;
         }
 
-        private void ScanNics(ISettings settings)
+        private void ScanNics(IDictionary<string, string> settings)
         {
             NetworkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
             _hardware = NetworkInterfaces.Where(DesiredNetworkType)

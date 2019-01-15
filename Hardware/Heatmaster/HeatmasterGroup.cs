@@ -64,7 +64,7 @@ namespace OpenHardwareMonitor.Hardware.Heatmaster {
       return result.ToArray();
     }
 
-    public HeatmasterGroup(ISettings settings) {
+    public HeatmasterGroup(IDictionary<string, string> settings) {
       
       // No implementation for Heatmaster on Unix systems
       if (Software.OperatingSystem.IsLinux) return;

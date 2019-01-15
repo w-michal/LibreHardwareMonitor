@@ -16,7 +16,7 @@ namespace OpenHardwareMonitor.Hardware.RAM {
 
     private Hardware[] hardware;
 
-    public RAMGroup(SMBIOS smbios, ISettings settings) {
+    public RAMGroup(SMBIOS smbios, IDictionary<string, string> settings) {
 
       // No implementation for RAM on Unix systems
 

@@ -46,7 +46,8 @@ namespace OpenHardwareMonitor.Hardware.Aquacomputer
         private readonly Sensor[] _voltages = new Sensor[2];
         private readonly Sensor[] _frequencies = new Sensor[2];
                
-        public AquastreamXT(HidDevice dev, ISettings settings) : base("Aquastream XT", new Identifier(dev.DevicePath), settings)
+        public AquastreamXT(HidDevice dev, IDictionary<string, string> settings) :
+          base("Aquastream XT", new Identifier(dev.DevicePath), settings)
         {
             device = dev;
 

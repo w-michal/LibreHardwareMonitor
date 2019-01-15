@@ -20,10 +20,10 @@ namespace OpenHardwareMonitor.GUI {
 
   public class UnitManager {
 
-    private PersistentSettings settings;
+    private IDictionary<string, string> settings;
     private TemperatureUnit temperatureUnit;
 
-    public UnitManager(PersistentSettings settings) {
+    public UnitManager(IDictionary<string, string> settings) {
       this.settings = settings;
       this.temperatureUnit = (TemperatureUnit)settings.GetValue("TemperatureUnit",
         (int)TemperatureUnit.Celsius);

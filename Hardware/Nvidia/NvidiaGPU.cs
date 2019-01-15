@@ -10,6 +10,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
@@ -32,7 +33,7 @@ namespace OpenHardwareMonitor.Hardware.Nvidia {
     private readonly Control fanControl;
 
     public NvidiaGPU(int adapterIndex, NvPhysicalGpuHandle handle,
-      NvDisplayHandle? displayHandle, ISettings settings)
+      NvDisplayHandle? displayHandle, IDictionary<string, string> settings)
       : base(GetName(handle), new Identifier("nvidiagpu",
           adapterIndex.ToString(CultureInfo.InvariantCulture)), settings) {
       this.adapterIndex = adapterIndex;

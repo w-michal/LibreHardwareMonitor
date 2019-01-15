@@ -9,6 +9,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
@@ -83,7 +84,7 @@ namespace OpenHardwareMonitor.Hardware.CPU {
       return result;
     }
 
-    public IntelCPU(int processorIndex, CPUID[][] cpuid, ISettings settings)
+    public IntelCPU(int processorIndex, CPUID[][] cpuid, IDictionary<string, string> settings)
       : base(processorIndex, cpuid, settings) {
       // set tjMax
       float[] tjMax;

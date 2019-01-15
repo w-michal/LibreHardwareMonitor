@@ -107,7 +107,6 @@
     <Compile Include="Hardware\TBalancer\FTD2XX.cs" />
     <Compile Include="Hardware\TBalancer\TBalancer.cs" />
     <Compile Include="Hardware\TBalancer\TBalancerGroup.cs" />
-    <Compile Include="Hardware\ISettings.cs" />
     <Compile Include="Hardware\HexStringArray.cs" />
     <Compile Include="Hardware\ThreadAffinity.cs" />
     <Compile Include="Properties\AssemblyLibInfo.cs" />

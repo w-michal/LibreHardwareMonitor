@@ -19,7 +19,7 @@ namespace OpenHardwareMonitor.Hardware.Nvidia {
     private readonly List<Hardware> hardware = new List<Hardware>();
     private readonly StringBuilder report = new StringBuilder();
 
-    public NvidiaGroup(ISettings settings) {
+    public NvidiaGroup(IDictionary<string, string> settings) {
       if (!NVAPI.IsAvailable)
         return;
 

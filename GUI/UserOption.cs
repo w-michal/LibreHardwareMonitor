@@ -19,10 +19,10 @@ namespace OpenHardwareMonitor.GUI {
     private bool value;
     private MenuItem menuItem;
     private event EventHandler changed;
-    private PersistentSettings settings;
+    private IDictionary<string, string> settings;
 
     public UserOption(string name, bool value,
-      MenuItem menuItem, PersistentSettings settings) {
+      MenuItem menuItem, IDictionary<string, string> settings) {
 
       this.settings = settings;
       this.name = name;

@@ -40,7 +40,7 @@ namespace OpenHardwareMonitor.Hardware.TBalancer {
     private delegate void MethodDelegate();
     private readonly MethodDelegate alternativeRequest;
 
-    public TBalancer(int portIndex, byte protocolVersion, ISettings settings)
+    public TBalancer(int portIndex, byte protocolVersion, IDictionary<string, string> settings)
       : base("T-Balancer bigNG",  new Identifier("bigng",
         portIndex.ToString(CultureInfo.InvariantCulture)), settings) 
     {

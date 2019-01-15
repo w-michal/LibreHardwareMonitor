@@ -14,15 +14,11 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Xml;
-using OpenHardwareMonitor.Hardware;
-
+using Settings = System.Collections.Generic.IDictionary<string, string>;
 namespace OpenHardwareMonitor {
-  public class PersistentSettings : ISettings {
+  public static class PersistentSettings {
 
-    private IDictionary<string, string> settings = 
-      new Dictionary<string, string>();
-
-    public void Load(string fileName) {
+    public static void Load(this Settings settings, string fileName) {
       XmlDocument doc = new XmlDocument();
       try {
         doc.Load(fileName);
@@ -63,7 +59,7 @@ namespace OpenHardwareMonitor {
       }
     }
 
-    public void Save(string fileName) {
+    public static void Save(this IDictionary<string, string> settings, string fileName) {
 
       XmlDocument doc = new XmlDocument();
       doc.AppendChild(doc.CreateXmlDeclaration("1.0", "utf-8", null));
@@ -107,31 +103,11 @@ namespace OpenHardwareMonitor {
       } catch { }
     }
 
-    public bool Contains(string name) {
-      return settings.ContainsKey(name);
-    }
-
-    public void SetValue(string name, string value) {
-      settings[name] = value;
-    }
-
-    public string GetValue(string name, string value) {
-      string result;
-      if (settings.TryGetValue(name, out result))
-        return result;
-      else
-        return value;
-    }
-
-    public void Remove(string name) {
-      settings.Remove(name);
-    }
-
-    public void SetValue(string name, int value) {
+    public static void SetValue(this Settings settings, string name, int value) {
       settings[name] = value.ToString();
     }
 
-    public int GetValue(string name, int value) {
+    public static int GetValue(this Settings settings,string name, int value) {
       string str;
       if (settings.TryGetValue(name, out str)) {
         int parsedValue;
@@ -144,11 +120,11 @@ namespace OpenHardwareMonitor {
       }
     }
 
-    public void SetValue(string name, float value) {
+    public static void SetValue(this Settings settings, string name, float value) {
       settings[name] = value.ToString(CultureInfo.InvariantCulture);
     }
 
-    public float GetValue(string name, float value) {
+    public static float GetValue(this Settings settings, string name, float value) {
       string str;
       if (settings.TryGetValue(name, out str)) {
         float parsedValue;
@@ -162,11 +138,11 @@ namespace OpenHardwareMonitor {
       }
     }
 
-    public void SetValue(string name, bool value) {
+    public static void SetValue(this Settings settings, string name, bool value) {
       settings[name] = value ? "true" : "false";
     }
 
-    public bool GetValue(string name, bool value) {
+    public static bool GetValue(this Settings settings, string name, bool value) {
       string str;
       if (settings.TryGetValue(name, out str)) {
         return str == "true";
@@ -175,11 +151,11 @@ namespace OpenHardwareMonitor {
       }
     }
 
-    public void SetValue(string name, Color color) {
+    public static void SetValue(this Settings settings, string name, Color color) {
       settings[name] = color.ToArgb().ToString("X8");
     }
 
-    public Color GetValue(string name, Color value) {
+    public static Color GetValue(this Settings settings, string name, Color value) {
       string str;
       if (settings.TryGetValue(name, out str)) {
         int parsedValue;

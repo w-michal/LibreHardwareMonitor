@@ -10,6 +10,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Threading;
@@ -31,7 +32,7 @@ namespace OpenHardwareMonitor.Hardware.CPU {
     private readonly byte thermSenseCoreSelCPU1;
     private readonly uint miscellaneousControlAddress;
 
-    public AMD0FCPU(int processorIndex, CPUID[][] cpuid, ISettings settings)
+    public AMD0FCPU(int processorIndex, CPUID[][] cpuid, IDictionary<string, string> settings)
       : base(processorIndex, cpuid, settings) 
     {
       float offset = -49.0f;

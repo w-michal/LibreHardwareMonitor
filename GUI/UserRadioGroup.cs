@@ -19,10 +19,10 @@ namespace OpenHardwareMonitor.GUI {
     private int value;
     private MenuItem[] menuItems;
     private event EventHandler changed;
-    private PersistentSettings settings;
+    private IDictionary<string, string> settings;
 
     public UserRadioGroup(string name, int value,
-      MenuItem[] menuItems, PersistentSettings settings) {
+      MenuItem[] menuItems, IDictionary<string, string> settings) {
       this.settings = settings;
       this.name = name;
       if (name != null)

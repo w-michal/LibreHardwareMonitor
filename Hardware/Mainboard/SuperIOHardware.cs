@@ -40,7 +40,7 @@ namespace OpenHardwareMonitor.Hardware.Mainboard {
     private readonly Mutex mutex;
 
     public SuperIOHardware(Mainboard mainboard, ISuperIO superIO, 
-      Manufacturer manufacturer, Model model, ISettings settings) 
+      Manufacturer manufacturer, Model model, IDictionary<string, string> settings) 
       : base(ChipName.GetName(superIO.Chip), new Identifier("lpc", 
         superIO.Chip.ToString().ToLowerInvariant()), settings)
     {
@@ -62,7 +62,7 @@ namespace OpenHardwareMonitor.Hardware.Mainboard {
       CreateControlSensors(superIO, settings, c);
     }
 
-    private void CreateControlSensors(ISuperIO superIO, ISettings settings, 
+    private void CreateControlSensors(ISuperIO superIO, IDictionary<string, string> settings, 
       IList<Ctrl> c) 
     {
       foreach (Ctrl ctrl in c) {
@@ -110,7 +110,7 @@ namespace OpenHardwareMonitor.Hardware.Mainboard {
       }
     }
 
-    private void CreateFanSensors(ISuperIO superIO, ISettings settings, 
+    private void CreateFanSensors(ISuperIO superIO, IDictionary<string, string> settings, 
       IList<Fan> f) 
     {
       foreach (Fan fan in f) {
@@ -122,7 +122,7 @@ namespace OpenHardwareMonitor.Hardware.Mainboard {
       }
     }
 
-    private void CreateTemperatureSensors(ISuperIO superIO, ISettings settings, 
+    private void CreateTemperatureSensors(ISuperIO superIO, IDictionary<string, string> settings, 
       IList<Temperature> t) 
     {
       foreach (Temperature temperature in t)
@@ -135,7 +135,7 @@ namespace OpenHardwareMonitor.Hardware.Mainboard {
         }
     }
 
-    private void CreateVoltageSensors(ISuperIO superIO, ISettings settings, 
+    private void CreateVoltageSensors(ISuperIO superIO, IDictionary<string, string> settings, 
       IList<Voltage> v) 
     {
       const string formula = "Voltage = value + (value - Vf) * Ri / Rf.";

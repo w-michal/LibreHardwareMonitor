@@ -45,7 +45,7 @@ namespace OpenHardwareMonitor.Hardware.HDD {
       };
 
     public SSDIndilinx(ISmart smart, string name, string firmwareRevision, 
-      int index, ISettings settings)
+      int index, IDictionary<string, string> settings)
       : base(smart, name, firmwareRevision, index, smartAttributes, settings) {}
   }
 }

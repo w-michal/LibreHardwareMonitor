@@ -9,6 +9,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace OpenHardwareMonitor.Hardware {
@@ -36,18 +37,19 @@ namespace OpenHardwareMonitor.Hardware {
     private ParameterDescription description;
     private float value;
     private bool isDefault;
-    private readonly ISettings settings;
+    private readonly IDictionary<string, string> settings;
 
-    public Parameter(ParameterDescription description, ISensor sensor, 
-      ISettings settings) 
+    public Parameter(ParameterDescription description, ISensor sensor,
+      IDictionary<string, string> settings) 
     {
       this.sensor = sensor;
       this.description = description;
       this.settings = settings;
-      this.isDefault = !settings.Contains(Identifier.ToString());
+      this.isDefault = !settings.ContainsKey(Identifier.ToString());
       this.value = description.DefaultValue;
       if (!this.isDefault) {
-        if (!float.TryParse(settings.GetValue(Identifier.ToString(), "0"),
+        settings.TryGetValue(Identifier.ToString(), out string svalue);
+        if (!float.TryParse(svalue,
           NumberStyles.Float,
           CultureInfo.InvariantCulture,
           out this.value))
@@ -79,8 +81,8 @@ namespace OpenHardwareMonitor.Hardware {
       set {
         this.isDefault = false;
         this.value = value;
-        this.settings.SetValue(Identifier.ToString(), value.ToString(
-          CultureInfo.InvariantCulture));
+        this.settings[Identifier.ToString()] = value.ToString(
+          CultureInfo.InvariantCulture);
       }
     }
 

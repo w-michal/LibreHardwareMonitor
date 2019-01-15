@@ -9,6 +9,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Net.NetworkInformation;
 
@@ -27,7 +28,7 @@ namespace OpenHardwareMonitor.Hardware.Nic
         private long bytesDownloaded;
         private readonly NetworkInterface networkInterface;
 
-        public Nic(NetworkInterface networkInterface, ISettings settings, int index)
+        public Nic(NetworkInterface networkInterface, IDictionary<string, string> settings, int index)
           : base(networkInterface.Name, new Identifier("NIC",index.ToString(CultureInfo.InvariantCulture)), settings)
         {
             this.networkInterface = networkInterface;

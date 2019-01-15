@@ -16,13 +16,13 @@ using OpenHardwareMonitor.Hardware;
 namespace OpenHardwareMonitor.GUI {
   public class HardwareNode : Node {
 
-    private PersistentSettings settings;
+    private IDictionary<string, string> settings;
     private UnitManager unitManager;
     private IHardware hardware;
 
     private List<TypeNode> typeNodes = new List<TypeNode>();
 
-    public HardwareNode(IHardware hardware, PersistentSettings settings, 
+    public HardwareNode(IHardware hardware, IDictionary<string, string> settings, 
       UnitManager unitManager) : base() 
     {
       this.settings = settings;

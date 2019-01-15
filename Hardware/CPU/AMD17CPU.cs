@@ -395,7 +395,7 @@ namespace OpenHardwareMonitor.Hardware.CPU
 
     private Processor _ryzen = null;
 
-    public AMD17CPU(int processorIndex, CPUID[][] cpuid, ISettings settings)
+    public AMD17CPU(int processorIndex, CPUID[][] cpuid, IDictionary<string, string> settings)
       : base(processorIndex, cpuid, settings)
     {
       // add all numa nodes 

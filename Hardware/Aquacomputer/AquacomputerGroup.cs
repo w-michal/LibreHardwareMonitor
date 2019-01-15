@@ -10,7 +10,7 @@ namespace OpenHardwareMonitor.Hardware.Aquacomputer
         private readonly List<IHardware> _hardware = new List<IHardware>();
         private readonly StringBuilder _report = new StringBuilder();
 
-        public AquacomputerGroup(ISettings settings)
+        public AquacomputerGroup(IDictionary<string, string> settings)
         {
             _report.AppendLine($"Aquacomputer Hardware");
             _report.AppendLine();

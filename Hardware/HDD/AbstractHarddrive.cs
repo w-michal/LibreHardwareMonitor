@@ -49,7 +49,7 @@ namespace OpenHardwareMonitor.Hardware.HDD
 
     protected AbstractHarddrive(ISmart smart, string name, 
       string firmwareRevision, int index, 
-      IEnumerable<SmartAttribute> smartAttributes, ISettings settings) 
+      IEnumerable<SmartAttribute> smartAttributes, IDictionary<string, string>  settings) 
       : base(name, new Identifier("hdd",
         index.ToString(CultureInfo.InvariantCulture)), settings)
     {
@@ -83,7 +83,7 @@ namespace OpenHardwareMonitor.Hardware.HDD
     }
 
     public static AbstractHarddrive CreateInstance(ISmart smart, 
-      int driveIndex, ISettings settings) 
+      int driveIndex, IDictionary<string, string> settings) 
     {
       IntPtr deviceHandle = smart.OpenDrive(driveIndex);
 

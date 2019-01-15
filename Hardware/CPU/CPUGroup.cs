@@ -73,7 +73,7 @@ namespace OpenHardwareMonitor.Hardware.CPU {
       return coreThreads;
     }
 
-    public CPUGroup(ISettings settings) {
+    public CPUGroup(IDictionary<string, string> settings) {
 
       CPUID[][] processorThreads = GetProcessorThreads();
       this.threads = new CPUID[processorThreads.Length][][];

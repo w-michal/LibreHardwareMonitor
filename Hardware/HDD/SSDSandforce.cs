@@ -53,7 +53,7 @@ namespace OpenHardwareMonitor.Hardware.HDD {
     private Sensor writeAmplification;
 
     public SSDSandforce(ISmart smart, string name, string firmwareRevision, 
-      int index, ISettings settings) 
+      int index, IDictionary<string, string> settings) 
       : base(smart, name, firmwareRevision,  index, smartAttributes, settings) 
     {
       this.writeAmplification = new Sensor("Write Amplification", 1, 

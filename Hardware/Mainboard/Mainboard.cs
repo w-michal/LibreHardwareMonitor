@@ -9,6 +9,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Text;
 using OpenHardwareMonitor.Hardware.LPC;
 
@@ -17,12 +18,12 @@ namespace OpenHardwareMonitor.Hardware.Mainboard {
     private readonly SMBIOS smbios;
     private readonly string name;
     private string customName;
-    private readonly ISettings settings;
+    private readonly IDictionary<string, string> settings;
     private readonly LPCIO lpcio;
     private readonly LMSensors lmSensors;
     private readonly Hardware[] superIOHardware;
 
-    public Mainboard(SMBIOS smbios, ISettings settings) {
+    public Mainboard(SMBIOS smbios, IDictionary<string,string> settings) {
       this.settings = settings;
       this.smbios = smbios;
 
@@ -46,8 +47,11 @@ namespace OpenHardwareMonitor.Hardware.Mainboard {
         this.name = Manufacturer.Unknown.ToString();
       }
 
-      this.customName = settings.GetValue(
-        new Identifier(Identifier, "name").ToString(), name);
+      this.customName = name;
+      if (settings.TryGetValue(new Identifier(Identifier, "name").ToString(), out string customname))
+      {
+        this.customName = customname;
+      }
 
       ISuperIO[] superIO;
 
@@ -74,8 +78,8 @@ namespace OpenHardwareMonitor.Hardware.Mainboard {
           customName = value;
         else
           customName = name;
-        settings.SetValue(new Identifier(Identifier, "name").ToString(),
-          customName);
+        settings[new Identifier(Identifier, "name").ToString()] =
+          customName;
       }
     }
 

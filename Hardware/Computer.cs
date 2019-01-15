@@ -21,7 +21,7 @@ namespace OpenHardwareMonitor.Hardware {
   public class Computer : IComputer {
 
     private readonly List<IGroup> groups = new List<IGroup>();
-    private readonly ISettings settings;
+    private readonly IDictionary<string, string> settings;
 
     private SMBIOS smbios;
 
@@ -37,11 +37,11 @@ namespace OpenHardwareMonitor.Hardware {
     private int nicCount;
 
     public Computer() {
-      this.settings = new Settings();
+      this.settings = new Dictionary<string, string>();
     }
 
-    public Computer(ISettings settings) {
-      this.settings = settings ?? new Settings();
+    public Computer(IDictionary<string, string> settings) {
+      this.settings = settings ?? new Dictionary<string, string>();
     }
 
     private void Add(IGroup group) {
@@ -404,21 +404,6 @@ namespace OpenHardwareMonitor.Hardware {
       foreach (IGroup group in groups)
         foreach (IHardware hardware in group.Hardware)
           hardware.Accept(visitor);
-    }
-
-    private class Settings : ISettings {
-
-      public bool Contains(string name) {
-        return false;
-      }
-
-      public void SetValue(string name, string value) { }
-
-      public string GetValue(string name, string value) {
-        return value;
-      }
-
-      public void Remove(string name) { }
     }
   }
 }
